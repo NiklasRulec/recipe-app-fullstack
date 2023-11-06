@@ -1,0 +1,90 @@
+.detailspage-section {
+  width: 100%;
+  min-height: 60rem;
+  background-color: var(--white);
+  border-top-right-radius: var(--radius);
+  border-top-left-radius: var(--radius);
+  position: relative;
+  z-index: 0;
+  animation: fadeInAnimation 0.2s ease-in forwards;
+}
+
+.detailspage-section h3 {
+  margin-bottom: 1rem;
+}
+.detailspage-section h4 {
+  margin-bottom: 0.5rem;
+}
+.detailspage-section p {
+  margin-bottom: 2rem;
+}
+
+.detailspage-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -5;
+  animation: var(--fade-in);
+}
+
+.detailspage-section .meal-details {
+  min-height: 60rem;
+  width: 100%;
+  margin-top: 30rem;
+  padding: 2rem;
+  box-shadow: var(--strongshadow);
+}
+
+.detailspage-section .meal-details .meal-details-buttons {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--purple);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+.detailspage-section .meal-details .meal-details-buttons button {
+  width: 50%;
+  height: 100%;
+  border: none;
+  border-radius: var(--radius);
+  background-color: rgba(0, 0, 0, 0);
+  color: var(--white);
+}
+
+.detailspage-section .meal-details .meal-details-buttons button.selected {
+  background-color: var(--darkpurple);
+  color: var(--white);
+  animation: fadeInAnimation 0.2s ease-in forwards;
+}
+
+.detailspage-section .meal-details .meal-details-text {
+  width: 100%;
+  min-height: 30rem;
+  padding: 1rem 0;
+}
+
+.detailspage-section .meal-details .meal-details-text h4 {
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: var(--fade-in);
+}
+
+.detailspage-section .meal-details .meal-details-text p {
+  width: 30rem;
+  min-height: 10rem;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  animation: var(--fade-in);
+}

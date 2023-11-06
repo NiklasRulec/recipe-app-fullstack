@@ -1,0 +1,12 @@
+.category-card {
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-right: 1rem;
+}

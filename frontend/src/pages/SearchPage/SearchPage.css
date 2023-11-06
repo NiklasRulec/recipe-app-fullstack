@@ -1,0 +1,10 @@
+.searchpage-section {
+  width: 100%;
+  min-height: 80rem;
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: var(--fade-in);
+}

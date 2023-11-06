@@ -1,0 +1,15 @@
+.headerbar {
+  width: 100%;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+  animation: var(--fade-in);
+}
+
+.headerbar img {
+  width: 15rem;
+  height: 15rem;
+  object-fit: contain;
+}

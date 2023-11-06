@@ -1,0 +1,99 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --black: black;
+  --white: white;
+  --purple: #7678ed;
+  --darkpurple: #3d348b;
+  --radius: 2rem;
+  --lightgrey: #e6ebf2;
+  --shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  --strongshadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  --fade-in: fadeInAnimation 0.5s ease-in-out;
+  --left-pad: 2rem;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 3.6rem;
+}
+
+h3 {
+  font-size: 2.8rem;
+}
+
+h4 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 1.6rem;
+}
+
+a {
+  font-size: 2rem;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 1440px;
+  overscroll-behavior-y: contain;
+  overscroll-behavior-x: contain;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+    bottom: -7rem;
+  }
+  to {
+    opacity: 1;
+    bottom: 0;
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    bottom: -7rem;
+  }
+  to {
+    bottom: 0;
+  }
+}
+
+@media only screen and (min-width: 430px) {
+  .wrapper {
+    display: none;
+  }
+  .mobileonly {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 429px) {
+  .mobileonly {
+    display: none;
+  }
+}

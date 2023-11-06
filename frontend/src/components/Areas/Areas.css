@@ -1,0 +1,34 @@
+.areas-section {
+  width: 100%;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: var(--left-pad);
+  animation: var(--fade-in);
+}
+
+.areas-gallery {
+  width: 100%;
+  height: 5rem;
+  padding-left: var(--left-pad);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: auto;
+  animation: var(--fade-in);
+  margin-bottom: 2rem;
+}
+
+.areas-gallery p {
+  background-color: var(--purple);
+  color: var(--white);
+  width: 10rem;
+  height: 4rem;
+  margin-right: 0.5rem;
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

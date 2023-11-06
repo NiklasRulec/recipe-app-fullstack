@@ -1,0 +1,26 @@
+.search-bar {
+  max-width: 35rem;
+  height: 10rem;
+  padding-left: var(--left-pad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: var(--fade-in);
+}
+
+.search-bar form {
+  width: 100%;
+  height: 5rem;
+}
+
+.search-bar form input {
+  width: 100%;
+  height: 5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--lightgrey);
+  padding-left: 5rem;
+  background-image: url("../../assets/img/search.svg");
+  background-size: 3.5rem 3.5rem;
+  background-position: 0.5rem center;
+  background-repeat: no-repeat;
+}

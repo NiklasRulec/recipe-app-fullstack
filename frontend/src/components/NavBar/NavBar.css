@@ -1,0 +1,23 @@
+nav {
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  border-top-right-radius: var(--radius);
+  border-top-left-radius: var(--radius);
+  background-color: var(--purple);
+  /* animation: slideInFromBottom 0.5s ease forwards; */
+}
+
+nav .nav-links {
+  width: 100%;
+  height: 90%;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

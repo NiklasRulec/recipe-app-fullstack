@@ -13,6 +13,9 @@ const ProfilePage = () => {
       const { data } = await axios.get(`/api/user/profile`);
       setLoggedUser(data);
       console.log(data);
+      console.log(data.name);
+      console.log(data.email);
+      console.log(data.favorites);
       setRefresh((prev) => !prev);
     };
     fetchUser();

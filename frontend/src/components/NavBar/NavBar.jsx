@@ -31,7 +31,7 @@ const NavBar = () => {
       {showNavBar ? (
         <nav>
           <div className="nav-links">
-            <Link to="/">
+            <Link to="/home">
               <HomeIcon fillColor="white" />
             </Link>
             <Link to="/search">

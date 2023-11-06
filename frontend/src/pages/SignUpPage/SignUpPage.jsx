@@ -1,4 +1,3 @@
-import NavBar from "../../components/NavBar/NavBar";
 import SignUp from "../../components/SignUp/SignUp";
 import "./SignUpPage";
 
@@ -8,7 +7,6 @@ const SignUpPage = () => {
       <section className="signup-page-section">
         <SignUp />
       </section>
-      <NavBar />
     </>
   );
 };

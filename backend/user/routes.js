@@ -17,41 +17,41 @@ userRouter.get("/", async (req, res) => {
   res.send(users);
 });
 
-// userRouter.post("/resetPassword", async (req, res) => {
-//   const { email } = req.body;
-//   try {
-//     console.log("reset password for ", email);
-//     await createResetToken(email);
-//     return res.sendStatus(200);
-//   } catch (e) {
-//     if (e?.message === "No User with this email") {
-//       return res.status(404).send({ error: "User not found" });
-//     }
+userRouter.post("/resetPassword", async (req, res) => {
+  const { email } = req.body;
+  try {
+    console.log("reset password for ", email);
+    await createResetToken(email);
+    return res.sendStatus(200);
+  } catch (e) {
+    if (e?.message === "No User with this email") {
+      return res.status(404).send({ error: "User not found" });
+    }
 
-//     return res.status(500).send({ error: "Unknown Error occurred" });
-//   }
-// });
+    return res.status(500).send({ error: "Unknown Error occurred" });
+  }
+});
 
-// userRouter.post("/resetPassword-confirm", async (req, res) => {
-//   const { id, token, password } = req.body;
-//   const isValidResetProcess = validateResetToken(id, token);
-//   try {
-//     if (!isValidResetProcess) {
-//       throw new Error("NonValidResetProcess");
-//     }
+userRouter.post("/resetPassword-confirm", async (req, res) => {
+  const { id, token, password } = req.body;
+  const isValidResetProcess = validateResetToken(id, token);
+  try {
+    if (!isValidResetProcess) {
+      throw new Error("NonValidResetProcess");
+    }
 
-//     const user = await User.findById(id);
-//     user.setPassword(password);
+    const user = await User.findById(id);
+    user.setPassword(password);
 
-//     await user.save();
-//     return res.send({
-//       data: { message: "New password confirmed" },
-//     });
-//   } catch (e) {
-//     console.log(e);
-//     res.status(500).send({ error: "Something went wrong" });
-//   }
-// });
+    await user.save();
+    return res.send({
+      data: { message: "New password confirmed" },
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).send({ error: "Something went wrong" });
+  }
+});
 
 userRouter.post("/signup", multerMiddleware.none(), async (req, res) => {
   // Neuen User erstellen

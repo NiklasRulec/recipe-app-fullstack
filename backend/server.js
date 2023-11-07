@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import path from "path";
 import cookieParser from "cookie-parser";
-
 import { userRouter } from "./user/routes.js";
 
 dotenv.config({

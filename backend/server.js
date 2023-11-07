@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import path from "path";
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import { userRouter } from "./user/routes.js";
 
@@ -19,6 +20,7 @@ const ReactAppDistPath = new URL("../frontend/dist/", import.meta.url);
 const ReactAppIndex = new URL("../frontend/dist/index.html", import.meta.url);
 
 app.use(express.json());
+app.use(cors());
 app.use(cookieParser());
 app.use(express.static(ReactAppDistPath.pathname));
 app.use("/api/user", userRouter);

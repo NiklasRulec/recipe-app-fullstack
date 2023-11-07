@@ -5,7 +5,6 @@ import { authenticateToken, generateAccessToken } from "./authToken.js";
 import { createResetToken, validateResetToken } from "./ResetTokenModel.js";
 
 export const userRouter = Router();
-
 const multerMiddleware = multer();
 
 const hoursInMillisec = (hours) => {
@@ -73,7 +72,6 @@ userRouter.post("/signup", multerMiddleware.none(), async (req, res) => {
     if (e.name === "ValidationError") {
       return res.status(400).send({ error: e });
     }
-
     // Duplication Error email existiert bereits als user
     if (e.name === "MongoServerError" && e.code === 11000) {
       console.log("Account exists already");
@@ -81,7 +79,6 @@ userRouter.post("/signup", multerMiddleware.none(), async (req, res) => {
         error: { message: "Username and Password combination not valid" },
       });
     }
-
     return res.status(500).send({ error: { message: "Unknown Server error" } });
   }
 });
@@ -96,9 +93,7 @@ userRouter.post("/login", multerMiddleware.none(), async (req, res) => {
   if (passwordIsValid) {
     const token = generateAccessToken({ email });
     console.log(token);
-
     res.cookie("auth", token, { httpOnly: true, maxAge: hoursInMillisec(4) });
-
     res.send({ message: "Success", data: user });
   } else {
     res.status(404).send({
@@ -109,8 +104,6 @@ userRouter.post("/login", multerMiddleware.none(), async (req, res) => {
     });
   }
 });
-
-// get user profile of logged in user --------------------------------------------------------------------------
 
 userRouter.get("/profile", authenticateToken, async (req, res) => {
   try {

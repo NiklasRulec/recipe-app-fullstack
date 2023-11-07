@@ -10,8 +10,6 @@ const SignUp = () => {
   const submit = async (e) => {
     e.preventDefault();
     setError(null);
-    console.log("clicked");
-
     const data = new FormData(e.currentTarget);
     try {
       await axios.post("/api/user/signup", data);

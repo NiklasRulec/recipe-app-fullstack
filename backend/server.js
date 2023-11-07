@@ -9,9 +9,7 @@ dotenv.config({
   path: path.join(path.resolve(), "..", ".env"),
 });
 
-await mongoose.connect(
-  "mongodb+srv://niklasrulec:Beyblade.12@recipe-app.mmvl1ov.mongodb.net/"
-);
+await mongoose.connect(process.env.DB);
 await mongoose.connection.syncIndexes();
 
 const PORT = process.env.PORT || 3000;

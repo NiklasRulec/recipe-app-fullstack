@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { RefreshContext } from "../../context/Context";
+import { UserContext } from "../../user/UserContext";
 import NavBar from "../../components/NavBar/NavBar";
 import "./ProfilePage.css";
 import axios from "axios";
 
 const ProfilePage = () => {
   const { refresh, setRefresh } = useContext(RefreshContext);
+  const { isLoggedIn, logout } = useContext(UserContext);
   const [loggedUser, setLoggedUser] = useState();
 
   useEffect(() => {
@@ -13,9 +15,6 @@ const ProfilePage = () => {
       const { data } = await axios.get(`/api/user/profile`);
       setLoggedUser(data);
       console.log(data);
-      console.log(data.name);
-      console.log(data.email);
-      console.log(data.favorites);
       setRefresh((prev) => !prev);
     };
     fetchUser();
@@ -24,7 +23,15 @@ const ProfilePage = () => {
   return (
     <>
       <section className="profilepage-section">
-        {loggedUser ? <h2>{loggedUser?.name}</h2> : <></>}
+        {loggedUser ? (
+          <>
+            <h2>{loggedUser?.name}</h2>
+            <p>Favoriten-Anzahl : {loggedUser?.favorites.length}</p>
+          </>
+        ) : (
+          <></>
+        )}
+        <button onClick={logout}>Logout</button>
       </section>
       <NavBar />
     </>

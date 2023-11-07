@@ -31,7 +31,7 @@ function App() {
         <h1>Mobile only</h1>
       </div>
       <div className="wrapper">
-        <nav>
+        {/* <nav>
           <a href="/">Home</a>
           {!isLoggedIn && (
             <>
@@ -47,7 +47,7 @@ function App() {
               </button>
             </>
           )}
-        </nav>
+        </nav> */}
         <main>
           <AreaContext.Provider value={{ area, setArea }}>
             <SearchInputContext.Provider

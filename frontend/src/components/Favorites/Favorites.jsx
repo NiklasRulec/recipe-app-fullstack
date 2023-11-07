@@ -6,19 +6,24 @@ import { Link } from "react-router-dom";
 
 const Favorites = () => {
   const [userFavorites, setUserFavorites] = useState([]);
+  const [loggedUser, setLoggedUser] = useState();
 
-  let userData = {
-    name: "Niklas",
-    favorites: [53013, 52831, 53065, 52896],
-  };
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data } = await axios.get(`/api/user/profile`);
+      setLoggedUser(data);
+      console.log(data);
+    };
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const favoritesData = [];
-        for (let i = 0; i < userData.favorites.length; i++) {
+        for (let i = 0; i < loggedUser.favorites.length; i++) {
           const response = await axios.get(
-            `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${userData.favorites[i]}`
+            `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${loggedUser.favorites[i]}`
           );
           favoritesData.push(response.data.meals[0]);
         }
@@ -29,7 +34,7 @@ const Favorites = () => {
     };
 
     fetchData();
-  }, []);
+  }, [loggedUser]);
 
   return (
     <>

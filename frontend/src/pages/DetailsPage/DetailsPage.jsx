@@ -1,19 +1,24 @@
 import { useParams } from "react-router-dom";
 import "./DetailsPage.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { RefreshContext } from "../../context/Context";
 import axios from "axios";
 import NavBar from "../../components/NavBar/NavBar";
+import FavoriteIcon from "../../components/Icons/FavoriteIcon";
 
 const DetailsPage = () => {
   const params = useParams();
+  const { refresh, setRefresh } = useContext(RefreshContext);
   const [mealData, setMealData] = useState("");
   const [selectedButton, setSelectedButton] = useState(true);
+  const [isFavorited, setIsFavorited] = useState(false);
 
   useEffect(() => {
     axios
       .get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.id}`)
       .then((res) => {
         setMealData(res.data.meals[0]);
+        console.log(res.data.meals[0]);
       })
       .catch((error) => {
         console.error("Fehler bei der Anfrage:", error);
@@ -23,6 +28,18 @@ const DetailsPage = () => {
   const handleButtonClick = (value) => {
     setSelectedButton(value);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await axios.get("/api/user/profile");
+      console.log(data);
+      let userFavorites = data.favorites;
+      const isFavorited = userFavorites.includes(mealData.idMeal);
+      console.log(userFavorites.includes(mealData.idMeal));
+      setIsFavorited(isFavorited);
+    };
+    fetchData();
+  }, [refresh]);
 
   return (
     <>
@@ -35,7 +52,10 @@ const DetailsPage = () => {
           />
           <section className="detailspage-section">
             <article className="meal-details">
-              <h3>{mealData.strMeal}</h3>
+              <div className="meal-details-top">
+                <h3>{mealData.strMeal}</h3>
+                <FavoriteIcon />
+              </div>
               <h4>{mealData.strCategory}</h4>
               <p>{mealData.strArea}</p>
               <div className="meal-details-buttons">

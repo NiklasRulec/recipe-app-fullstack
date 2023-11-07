@@ -1,0 +1,13 @@
+.login-page-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  animation: var(--fade-in);
+}
+
+.login-page-section img {
+  width: 15rem;
+  height: 15rem;
+  object-fit: contain;
+}

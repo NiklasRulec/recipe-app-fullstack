@@ -14,7 +14,7 @@ export const UserProvider = ({ children }) => {
   const logout = async () => {
     await axios.get("/api/user/logout");
     setUser(null);
-    nav("/");
+    nav("/login");
   };
 
   useEffect(() => {

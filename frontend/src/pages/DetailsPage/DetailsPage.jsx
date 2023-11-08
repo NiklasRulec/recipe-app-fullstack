@@ -4,42 +4,68 @@ import { useContext, useEffect, useState } from "react";
 import { RefreshContext } from "../../context/Context";
 import axios from "axios";
 import NavBar from "../../components/NavBar/NavBar";
-import FavoriteIcon from "../../components/Icons/FavoriteIcon";
+import heartblack from "../../assets/img/heart-icon-black.svg";
+import heartpurple from "../../assets/img/heart-icon-purple.svg";
 
 const DetailsPage = () => {
   const params = useParams();
   const { refresh, setRefresh } = useContext(RefreshContext);
   const [mealData, setMealData] = useState("");
   const [selectedButton, setSelectedButton] = useState(true);
-  const [isFavorited, setIsFavorited] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(false); // Setze den Standardwert des Favoritenstatus
 
   useEffect(() => {
     axios
       .get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.id}`)
       .then((res) => {
         setMealData(res.data.meals[0]);
-        console.log(res.data.meals[0]);
       })
       .catch((error) => {
         console.error("Fehler bei der Anfrage:", error);
       });
   }, [params.id]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await axios.get("/api/user/profile");
+      let userFavorites = data.favorites;
+      const isFavorited = userFavorites.includes(mealData.idMeal);
+      setIsFavorited(isFavorited); // Update the isFavorited state based on the backend response
+    };
+    fetchData();
+  }, []);
+
+  const handleFavoriteClick = async () => {
+    try {
+      const userData = await axios.get("/api/user/profile");
+      let userFavorites = userData.data.favorites;
+      let userEmail = userData.data.email;
+      const isAlreadyFavorited = userFavorites.includes(mealData.idMeal);
+      const requestData = {
+        email: userEmail,
+        idMeal: mealData.idMeal,
+      };
+
+      await axios.put("/api/user/profile", requestData);
+      // Refetch user data to update favorites
+      const updatedUserData = await axios.get("/api/user/profile");
+      const updatedFavorites = updatedUserData.data.favorites;
+      const isFavorited = updatedFavorites.includes(mealData.idMeal);
+      setIsFavorited(isFavorited);
+      setRefresh((prev) => !prev);
+      console.log("Favoriten erfolgreich aktualisiert");
+    } catch (error) {
+      console.error("Fehler beim Aktualisieren der Favoriten:", error);
+    }
+  };
+
   const handleButtonClick = (value) => {
     setSelectedButton(value);
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios.get("/api/user/profile");
-      console.log(data);
-      let userFavorites = data.favorites;
-      const isFavorited = userFavorites.includes(mealData.idMeal);
-      console.log(userFavorites.includes(mealData.idMeal));
-      setIsFavorited(isFavorited);
-    };
-    fetchData();
-  }, [refresh]);
+    console.log(isFavorited);
+  }, [isFavorited]);
 
   return (
     <>
@@ -54,7 +80,12 @@ const DetailsPage = () => {
             <article className="meal-details">
               <div className="meal-details-top">
                 <h3>{mealData.strMeal}</h3>
-                <FavoriteIcon />
+                <img
+                  src={isFavorited ? heartpurple : heartblack}
+                  alt="heart-icon"
+                  onClick={handleFavoriteClick}
+                  className="heart-icon"
+                />
               </div>
               <h4>{mealData.strCategory}</h4>
               <p>{mealData.strArea}</p>

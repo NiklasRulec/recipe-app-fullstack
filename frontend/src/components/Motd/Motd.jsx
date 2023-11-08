@@ -19,7 +19,7 @@ const Motd = () => {
 
   return (
     <section className="motd-section">
-      <h3>Meal of the Day</h3>
+      <h3>Recipe recommendation</h3>
       {motd ? (
         <>
           <Link to={`/${motd.idMeal}`}>

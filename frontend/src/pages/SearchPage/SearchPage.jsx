@@ -22,7 +22,6 @@ const SearchPage = () => {
       .get(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`)
       .then((res) => {
         setMealData(res.data.meals);
-        console.log(res.data.meals);
       })
       .catch((error) => {
         console.error("Fehler bei der Anfrage:", error);

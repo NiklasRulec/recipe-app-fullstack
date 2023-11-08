@@ -25,13 +25,17 @@ const ProfilePage = () => {
       <section className="profilepage-section">
         {loggedUser ? (
           <>
-            <h2>{loggedUser?.name}</h2>
+            <article className="profilepage-top">
+              <button onClick={logout} className="btn">
+                Logout
+              </button>
+            </article>
+            <h2>Hallo, {loggedUser?.name}</h2>
             <p>Favoriten-Anzahl : {loggedUser?.favorites.length}</p>
           </>
         ) : (
           <></>
         )}
-        <button onClick={logout}>Logout</button>
       </section>
       <NavBar />
     </>

@@ -115,6 +115,28 @@ userRouter.get("/profile", authenticateToken, async (req, res) => {
   }
 });
 
+userRouter.put("/profile", authenticateToken, async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.userEmail });
+    // Check if the meal ID exists in the favorites array
+    const existingIndex = user.favorites.indexOf(req.body.idMeal);
+    if (existingIndex > -1) {
+      // Remove the meal ID from favorites if it exists
+      user.favorites.splice(existingIndex, 1);
+    } else {
+      // Add the meal ID to favorites if it doesn't exist
+      user.favorites.push(req.body.idMeal);
+    }
+    await user.save(); // Save the updated user data
+    res.status(200).send({ message: "Favoriten erfolgreich aktualisiert" });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .send("Es gab einen Fehler beim Aktualisieren der Favoriten");
+  }
+});
+
 userRouter.get("/logout", (req, res) => {
   res.clearCookie("auth");
   res.send("OK");

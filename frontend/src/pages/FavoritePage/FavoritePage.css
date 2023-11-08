@@ -1,6 +1,6 @@
 .favoritepage-section {
   width: 100%;
-  min-height: 80rem;
+  min-height: 90rem;
   padding-top: 2rem;
   animation: var(--fade-in);
 }

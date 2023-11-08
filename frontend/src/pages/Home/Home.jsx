@@ -1,6 +1,5 @@
 import Areas from "../../components/Areas/Areas";
 import Categories from "../../components/Categories/Categories";
-import Favorites from "../../components/Favorites/Favorites";
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import Motd from "../../components/Motd/Motd";
 import NavBar from "../../components/NavBar/NavBar";
@@ -14,7 +13,6 @@ const Home = () => {
         <Motd />
         <Areas />
         <Categories />
-        <Favorites />
       </section>
       <NavBar />
     </>

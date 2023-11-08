@@ -1,9 +1,35 @@
 .profilepage-section {
   width: 100%;
-  min-height: 80rem;
+  min-height: 90rem;
+  padding-top: 2rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   animation: var(--fade-in);
+}
+
+.profilepage-section .profilepage-top {
+  width: 90%;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 20rem;
+}
+
+.profilepage-section .profilepage-top .btn {
+  padding: 1rem 2rem;
+  background-color: var(--white);
+  color: var(--darkpurple);
+  border: 1px solid var(--darkpurple);
+  border-radius: var(--radius);
+  transition: all 0.3s;
+}
+
+.profilepage-section .profilepage-top .btn:active {
+  transform: scale(0.95);
+  background-color: var(--darkpurple);
+  color: var(--white);
+  border: 1px solid var(--darkpurple);
 }

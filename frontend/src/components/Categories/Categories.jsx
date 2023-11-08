@@ -24,7 +24,7 @@ const Categories = () => {
       </section>
       <article className="categories-gallery">
         {categories?.map((item, index) => (
-          <Link to="/${item.strCategory}" key={index}>
+          <Link to={`/category/${item.strCategory.toLowerCase()}`} key={index}>
             <CategoryCard
               title={item.strCategory}
               img={item.strCategoryThumb}

@@ -1,0 +1,17 @@
+.categorypage-section {
+  width: 100%;
+  height: 5rem;
+  padding-top: 2rem;
+  padding-left: var(--left-pad);
+  margin-bottom: 2rem;
+  animation: var(--fade-in);
+}
+
+.categorypage-gallery {
+  width: 100%;
+  min-height: 80rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}

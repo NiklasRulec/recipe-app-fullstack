@@ -18,6 +18,7 @@ import FavoritePage from "./pages/FavoritePage/FavoritePage";
 import DetailsPage from "./pages/DetailsPage/DetailsPage";
 import ResetPassword from "./user/ResetPassword";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
+import CategoryPage from "./pages/CategoryPage/CategoryPage";
 
 function App() {
   const { isLoggedIn, logout } = useContext(UserContext);
@@ -59,6 +60,10 @@ function App() {
                   <Route path="/home" element={<Home />} />
                   <Route path="/search" element={<SearchPage />} />
                   <Route path="/favorite" element={<FavoritePage />} />
+                  <Route
+                    path="/category/:category"
+                    element={<CategoryPage />}
+                  />
                   <Route path="/:id" element={<DetailsPage />} />
                   <Route path="/profile" element={<ProfilePage />} />
                   <Route path="/signup" element={<SignUpPage />} />

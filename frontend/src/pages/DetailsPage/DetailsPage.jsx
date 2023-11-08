@@ -12,7 +12,7 @@ const DetailsPage = () => {
   const { refresh, setRefresh } = useContext(RefreshContext);
   const [mealData, setMealData] = useState("");
   const [selectedButton, setSelectedButton] = useState(true);
-  const [isFavorited, setIsFavorited] = useState(false); // Setze den Standardwert des Favoritenstatus
+  const [isFavorited, setIsFavorited] = useState();
 
   useEffect(() => {
     axios
@@ -27,32 +27,33 @@ const DetailsPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("/api/user/profile");
-      let userFavorites = data.favorites;
-      const isFavorited = userFavorites.includes(mealData.idMeal);
-      setIsFavorited(isFavorited); // Update the isFavorited state based on the backend response
+      try {
+        const userData = await axios.get("/api/user/profile");
+        console.log(userData.data.favorites);
+        setIsFavorited(userData.data.favorites.includes(Number(params.id)));
+      } catch (error) {
+        console.error("Fehler beim Abrufen der Benutzerfavoriten:", error);
+      }
     };
     fetchData();
   }, []);
 
   const handleFavoriteClick = async () => {
     try {
+      console.log("ja");
       const userData = await axios.get("/api/user/profile");
-      let userFavorites = userData.data.favorites;
-      let userEmail = userData.data.email;
-      const isAlreadyFavorited = userFavorites.includes(mealData.idMeal);
+      const userEmail = userData.data.email;
       const requestData = {
         email: userEmail,
         idMeal: mealData.idMeal,
       };
-
       await axios.put("/api/user/profile", requestData);
-      // Refetch user data to update favorites
+      // Aktualisierung des Favoritenstatus nach dem Klick auf das Herzsymbol
+      setRefresh((prev) => !prev); // Dadurch wird ein Refresh ausgelöst
       const updatedUserData = await axios.get("/api/user/profile");
-      const updatedFavorites = updatedUserData.data.favorites;
-      const isFavorited = updatedFavorites.includes(mealData.idMeal);
-      setIsFavorited(isFavorited);
-      setRefresh((prev) => !prev);
+      setIsFavorited(
+        updatedUserData.data.favorites.includes(Number(params.id))
+      ); // Aktualisiere den Favoritenstatus
       console.log("Favoriten erfolgreich aktualisiert");
     } catch (error) {
       console.error("Fehler beim Aktualisieren der Favoriten:", error);
@@ -62,10 +63,6 @@ const DetailsPage = () => {
   const handleButtonClick = (value) => {
     setSelectedButton(value);
   };
-
-  useEffect(() => {
-    console.log(isFavorited);
-  }, [isFavorited]);
 
   return (
     <>

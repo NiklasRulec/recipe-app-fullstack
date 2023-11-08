@@ -29,7 +29,6 @@ const DetailsPage = () => {
     const fetchData = async () => {
       try {
         const userData = await axios.get("/api/user/profile");
-        console.log(userData.data.favorites);
         setIsFavorited(userData.data.favorites.includes(Number(params.id)));
       } catch (error) {
         console.error("Fehler beim Abrufen der Benutzerfavoriten:", error);
@@ -40,7 +39,6 @@ const DetailsPage = () => {
 
   const handleFavoriteClick = async () => {
     try {
-      console.log("ja");
       const userData = await axios.get("/api/user/profile");
       const userEmail = userData.data.email;
       const requestData = {

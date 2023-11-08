@@ -5,6 +5,7 @@ import "./SignUp.css";
 
 const SignUp = () => {
   const [error, setError] = useState(null);
+  const [accountCreated, setAccountCreated] = useState(false);
   const nav = useNavigate();
 
   const submit = async (e) => {
@@ -13,7 +14,10 @@ const SignUp = () => {
     const data = new FormData(e.currentTarget);
     try {
       await axios.post("/api/user/signup", data);
-      nav("/login");
+      setAccountCreated(true);
+      setTimeout(() => {
+        nav("/login");
+      }, 2000);
     } catch (e) {
       if (e?.response?.data?.error?.message) {
         setError(e?.response?.data?.error?.message);
@@ -31,7 +35,14 @@ const SignUp = () => {
         <input name="email" type="text" placeholder="Email" />
         <input name="password" type="password" placeholder="Passwort" />
         <input type="submit" className="btn" value="Registrieren" />
+        {accountCreated && (
+          <>
+            <p>Account wurde erstellt</p>
+            <span className="loader2"></span>
+          </>
+        )}
       </form>
+
       <h4>Account bereits vorhanden?</h4>
       <Link to="/login">
         <p className="btn">Login</p>

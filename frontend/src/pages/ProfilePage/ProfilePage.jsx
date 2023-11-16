@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { RefreshContext } from "../../context/Context";
-import { UserContext } from "../../user/UserContext";
+import { UserContext } from "../../context/UserContext";
 import NavBar from "../../components/NavBar/NavBar";
 import "./ProfilePage.css";
 import axios from "axios";

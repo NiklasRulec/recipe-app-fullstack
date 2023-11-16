@@ -24,14 +24,11 @@ const resetTokenSchema = new Schema({
 export const ResetToken = model("ResetToken", resetTokenSchema);
 
 export const createResetToken = async (userEmail) => {
-  // Check if user exists
   const user = await User.findOne({ email: userEmail });
   if (!user) {
     throw new Error("No User with this email");
   }
 
-  // if token is already present delete it
-  // there should be only one reset token per user
   let token = await ResetToken.findOne({ userId: user.id });
   if (token) await token.deleteOne();
 
@@ -40,18 +37,15 @@ export const createResetToken = async (userEmail) => {
   await ResetToken.create({
     userId: user.id,
     token: resetToken,
-    // Optional dank default value
     createdAt: Date.now(),
   });
 
-  // URL von unserer Render APP (local via .env setzen)
   const clientURL = process.env.RENDER_EXTERNAL_URL;
   const resetURL = new URL(
     `/passwordReset?token=${resetToken}&id=${user.id}`,
     clientURL
   );
 
-  // Create Email template
   const mailHTML = passwordResetMailTemplate({
     name: user.name,
     resetLink: resetURL,

@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useContext, useState } from "react";
-import { UserContext } from "./user/UserContext";
+import { UserContext } from "./context/UserContext";
 import {
   SearchInputContext,
   AreaContext,
@@ -16,7 +16,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import FavoritePage from "./pages/FavoritePage/FavoritePage";
 import DetailsPage from "./pages/DetailsPage/DetailsPage";
-import ResetPassword from "./user/ResetPassword";
+import ResetPassword from "./components/ResetPassword/ResetPassword";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
 

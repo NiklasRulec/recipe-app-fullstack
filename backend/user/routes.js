@@ -6,7 +6,6 @@ import { createResetToken, validateResetToken } from "./ResetTokenModel.js";
 
 export const userRouter = Router();
 const multerMiddleware = multer();
-
 const hoursInMillisec = (hours) => {
   return 1000 * 60 * 60 * hours;
 };
@@ -38,10 +37,8 @@ userRouter.post("/resetPassword-confirm", async (req, res) => {
     if (!isValidResetProcess) {
       throw new Error("NonValidResetProcess");
     }
-
     const user = await User.findById(id);
     user.setPassword(password);
-
     await user.save();
     return res.send({
       data: { message: "New password confirmed" },
@@ -53,12 +50,9 @@ userRouter.post("/resetPassword-confirm", async (req, res) => {
 });
 
 userRouter.post("/signup", multerMiddleware.none(), async (req, res) => {
-  // Neuen User erstellen
   const { name, email } = req.body;
   const newUser = new User({ name, email });
-  // user.setPassword (hash und salt setzen)
   newUser.setPassword(req.body.password);
-  // user speichern
   try {
     await newUser.save();
     return res.send({
@@ -72,7 +66,6 @@ userRouter.post("/signup", multerMiddleware.none(), async (req, res) => {
     if (e.name === "ValidationError") {
       return res.status(400).send({ error: e });
     }
-    // Duplication Error email existiert bereits als user
     if (e.name === "MongoServerError" && e.code === 11000) {
       console.log("Account exists already");
       return res.status(400).send({
@@ -87,8 +80,6 @@ userRouter.post("/login", multerMiddleware.none(), async (req, res) => {
   const { email, password } = req.body;
   console.log({ email, password });
   const user = await User.findOne({ email }).select("+hash").select("+salt");
-  // dieses password würde den gleichen hash produzieren
-  // (wie der in der Datenbank)
   const passwordIsValid = user.verifyPassword(password);
   if (passwordIsValid) {
     const token = generateAccessToken({ email });
@@ -118,16 +109,13 @@ userRouter.get("/profile", authenticateToken, async (req, res) => {
 userRouter.put("/profile", authenticateToken, async (req, res) => {
   try {
     const user = await User.findOne({ email: req.userEmail });
-    // Check if the meal ID exists in the favorites array
     const existingIndex = user.favorites.indexOf(req.body.idMeal);
     if (existingIndex > -1) {
-      // Remove the meal ID from favorites if it exists
       user.favorites.splice(existingIndex, 1);
     } else {
-      // Add the meal ID to favorites if it doesn't exist
       user.favorites.push(req.body.idMeal);
     }
-    await user.save(); // Save the updated user data
+    await user.save();
     res.status(200).send({ message: "Favoriten erfolgreich aktualisiert" });
   } catch (err) {
     console.log(err);

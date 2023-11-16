@@ -25,13 +25,6 @@ app.use(cookieParser());
 app.use(express.static(ReactAppDistPath.pathname));
 app.use("/api/user", userRouter);
 
-/*
- * express.static matched auf jede Datei im angegebenen Ordner
- * und erstellt uns einen request handler for FREE
- * app.get("/",(req,res)=> res.sendFile("path/to/index.html"))
- * app.get("/index.html",(req,res)=> res.sendFile("path/to/index.html"))
- */
-
 app.get("/api/status", (req, res) => {
   res.send({ status: "Ok" });
 });
